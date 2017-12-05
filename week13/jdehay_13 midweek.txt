@@ -1,0 +1,87 @@
+
+// New interface
+package interfaceSample;
+
+/**
+ *
+ * @author dithanial
+ */
+public interface StartUp {
+    public void startUp();
+    public void ready();
+}
+
+// Edited to add startUp();
+@Override
+public void shutDown() {
+    /* Calls to methods */
+    shutDown_Heater();
+    shutdown_GateValves();
+    shutdown_Turbo();
+    shutDown_Evacuate();
+    suspend();
+    startUp();
+}
+
+// The following methods are located in the ShudDownSystem.java class
+
+// added StartUp interface implementation
+public class ShutDownSystem implements ShutDown, Suspend, StartUp {
+/**
+ * Implementation of the Startup interface
+ */
+@Override
+public void startUp() {
+    startUp_pumpDown();
+    startUp_Turbo();
+    startUp_GateValves();
+    startUp_Heater();
+    ready();
+}
+
+/**
+ * Method to get system ready to startup
+ */
+private void startUp_pumpDown() {
+    System.out.println("Pumping down chamber...");
+    /* Code that runs pumpdown process call here */
+    System.out.println("Chamber pumped down and @ 0 torr.");
+}
+
+/**
+ * Method to start up HiVac turbos
+ */
+private void startUp_Turbo() {
+    System.out.println("HiVac turbo spinning up...");
+    /* Code that runs turbo startup process call here */
+    System.out.println("HiVac turbo @ speed.");
+}
+
+/**
+ * Method to open gate valves
+ */
+private void startUp_GateValves() {
+    System.out.println("Gate valves opening...");
+    /* Code that opens gate valves call here */
+    System.out.println("All gate valves open.");
+}
+
+/**
+ * Method to start up heaters
+ */
+private void startUp_Heater() {
+    System.out.println("Heater power on...");
+    System.out.println("Heater starting...");
+    /* Code that runs a heater startup process call here */
+    System.out.println("Heater at operating temperature.");
+}
+
+/**
+ * Lets operators know system is ready
+ */
+@Override
+public void ready() {
+    /* Code that calls resume production line process call here */
+    System.out.println("System ready for production.");
+}
+}
